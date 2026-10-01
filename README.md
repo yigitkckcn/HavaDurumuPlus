@@ -72,9 +72,12 @@ com.kampplus.hava
 
 ---
 
-## 🛠️ Çalıştırma & Test
+## 🛠️ Çalıştırma, Derleme & Test
 
 ```bash
+# Release APK üretimi (İmzalı ve kuruluma hazır: app/build/outputs/apk/release/app-release.apk)
+./gradlew assembleRelease
+
 # Debug APK üretimi
 ./gradlew assembleDebug
 
