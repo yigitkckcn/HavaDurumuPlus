@@ -7,6 +7,7 @@ import com.kampplus.hava.feature.weather.domain.model.AirQuality
 import com.kampplus.hava.feature.weather.domain.model.City
 import com.kampplus.hava.feature.weather.domain.model.CityWeather
 import com.kampplus.hava.feature.weather.domain.model.Forecast
+import com.kampplus.hava.feature.weather.domain.model.HourlyForecast
 import com.kampplus.hava.feature.weather.domain.model.WeatherCode
 import com.kampplus.hava.feature.weather.domain.policy.WeatherAlertDetector
 import com.kampplus.hava.feature.weather.domain.policy.WeatherConditionClassifier
@@ -50,7 +51,7 @@ class WeatherUiMapper @Inject constructor(
         val condition = conditionClassifier.classify(current.weatherCode)
         val conditionUi = conditionUiRegistry.resolve(condition)
         val currentHour = current.observedAt.truncatedTo(ChronoUnit.HOURS)
-        val filteredHourly = hourly.filter { !it.time.isBefore(currentHour) }.take(HOURLY_COUNT)
+        val filteredHourly: List<HourlyForecast> = hourly.filter { !it.time.isBefore(currentHour) }.take(HOURLY_COUNT)
         val alerts = alertDetector.detectAlerts(current)
 
         ForecastUiModel(
